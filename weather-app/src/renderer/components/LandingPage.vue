@@ -25,13 +25,31 @@
         tempMax: null,
         humidity: null,
         icon: '',
-       }
+      }
     },
     methods: {
-      open (link) {
-        this.$electron.shell.openExternal(link)
-      }
-    }
+      showWeather() {
+        this.$http
+          .get(`/weather?q=${this.query}&units=metric&&appid=${API_KEY}`)
+          .then(response => {
+            this.city = response.data.name;
+            this.country = response.data.sys.country;
+            this.weatherDescription = response.data.weather[0].description;
+            this.temp = response.data.main.temp;
+            this.tempMin = response.data.main.temp_min;
+            this.tempMax = response.data.main.temp_max;
+            this.humidity = response.data.main.humidity;
+            this.icon = `http://openweathermap.org/img/w/${
+              response.data.weather[0].icon
+            }.png`;
+            this.error = false;
+          })
+          .catch(() => {
+            this.error = true;
+            this.city = '';
+          })
+        }
+      },
   }
 </script>
 
