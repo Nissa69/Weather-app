@@ -13,7 +13,20 @@
 
   export default {
     name: 'landing-page',
-    components: { SystemInformation },
+    data() {
+      return {
+        query: '',
+        error: false,
+        city: '',
+        country: '',
+        weatherDescription: '',
+        temp: null,
+        tempMin: null,
+        tempMax: null,
+        humidity: null,
+        icon: '',
+       }
+    },
     methods: {
       open (link) {
         this.$electron.shell.openExternal(link)
