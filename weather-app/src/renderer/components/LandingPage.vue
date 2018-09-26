@@ -30,7 +30,8 @@
     },
     methods: {
       showWeather() {
-    this.$http.get(`/weather?q=${this.query}&units=metric&&appid=${API_KEY}`)
+    this.$http.get(`/weather?q=${this.query}&units=metric&&appid=${`7af6fab88c5d00b927eefc28d21ba4a5
+`}`)
       .then(response => {
         this.city = response.data.name;
         this.country = response.data.sys.country;
