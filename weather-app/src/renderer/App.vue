@@ -10,7 +10,7 @@
       Cette vile n'existe pas ! Rententez avec une autre ;)
     </section>
 
-    <section v-if="city.length" class="weather result">
+    <section v-if="city.length" class="weather-result">
       <h1>{{city}}, {{country}}</h1>
       <p><em>{{weatherDescription}}</em></p>
       <div class="weather-result__main">
