@@ -1,12 +1,32 @@
 <template>
-  <div id="app">
+  <main id="app">
     <p>Entrez le nom de la ville</p>
     <section class="weather-app">
       <input type="text" v-model="query">
       <button :disabled="!query.length"  @click="showWeather">check</button>
     </section>
 
-  </div>
+    <section v-if=" error" class="weather-error">
+      Cette vile n'existe pas ! Rententez avec une autre ;)
+    </section>
+
+    <section v-if="city.length" class="weather result">
+      <h1>{{city}}, {{country}}</h1>
+      <p><em>{{weatherDescription}}</em></p>
+      <div class="weather-result_main">
+          <img :src="icon" alt="Weather icon">
+          <div class="weather-result_temp">
+              {{temp}}&deg;C
+          </div>
+      </div>
+      <div class="weather-result_details">
+        <p>Min: {{tempMin}}&deg;C</p>
+        <p>Max: {{tempMax}}&deg;C</p>
+        <p>Humidité: {{humidity}}%</p>
+      </div>
+    </section>
+
+  </main>
 </template>
 
 <script>
@@ -84,7 +104,8 @@
   }
 
   main {
-    display: flex;
+    display: inline-flex;
+    text-align: center;
     justify-content: space-between;
   }
 
@@ -135,5 +156,78 @@
   .doc button.alt {
     color: #42b983;
     background-color: transparent;
+  }
+</style>
+
+<style lang="scss">
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  html,
+  body,
+  #app {
+    height: 100%;
+  }
+  #app {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    padding: 10px;
+    background: rgb(212, 228, 239);
+    background: -moz-radial-gradient(
+      center,
+      ellipse cover,
+      rgba(212, 228, 239, 1) 0%,
+      rgba(134,174, 204, 1) 100%
+    );
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4e4ef', endColorstr='#86aecc',GradientType=1);
+  }
+
+  .weather-input {
+    display: flex;
+    align-items: center;
+    padding: 20px 0;
+  }
+
+  .weather-result {
+    text-align: center;
+    &__main {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-top: 5px;
+      font-size: 1.3rem;
+      font-weight: bold;
+    }
+    &__details {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: dimgray;
+
+    }
+  }
+
+  .weather-error {
+    color: red;
+    font-weight: bold;
+  }
+
+  input {
+    width: 75%;
+    outline: none;
+    height: 20px;
+    font-size: 0.8rem;
+  }
+
+  button {
+    display: block;
+    width: 25%;
+    height: 25px;
+    outline: none;
+    border-radius: 5px;
+    white-space: nowrap;
+    margin: 0 10px;
+    font-size: 0.8rem;
   }
 </style>

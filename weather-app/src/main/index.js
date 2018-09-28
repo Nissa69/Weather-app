@@ -44,6 +44,11 @@ app.on('activate', () => {
   }
 })
 
+mainWindow = new BrowserWindow({
+  height: 563,
+  useContentSize: true,
+  width: 1000
+})
 /**
  * Auto Updater
  *
